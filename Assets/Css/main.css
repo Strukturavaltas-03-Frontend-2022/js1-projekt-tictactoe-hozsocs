@@ -1,0 +1,72 @@
+ body {
+    background-color: #d1dcdd;
+ }
+ 
+
+    .grid-container {
+    display: grid;
+    column-gap: 0px;
+    row-gap: 0;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
+    background-color: #528abb;
+    padding: 10px;
+    margin: 3vh auto; 
+    padding: 20px;
+    width: 72vh; 
+    height:72vh;
+    font-size: 1.5vW;
+    border-radius: 10px;
+    border: 1px solid #528abb;
+    box-shadow:  0px 0px 20px 20px rgba(0, 0, 0, 0.2);
+      }
+  
+  .grid-item {
+    
+    border: 1px solid #acd0eb;
+    font-size: 2rem;
+    text-align: center;
+    height: 16vh;
+    color: #e5fcff;
+    padding-top: 8vh;
+    border-right: none;
+    border-bottom: none;
+  }
+  
+  .grid-item:hover, .grid-item:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  
+  .grid__item--top {
+    border-top: none;
+  }
+
+  .grid__item--left { 
+    border-left: none;
+  }
+  
+  .btn__newGame {
+    position: absolute;
+    top: 3%;
+    right: 2%;
+    background-color: #2ecd70;
+    padding: 2% 5%;
+    border: none;
+    color: white;
+    margin: 0 0;
+  }
+  
+  .btn__newGame:hover, .btn__newGame:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  } 
+
+   .message {
+    position:absolute;
+    top: 5%;
+    right: 25%;
+   }
