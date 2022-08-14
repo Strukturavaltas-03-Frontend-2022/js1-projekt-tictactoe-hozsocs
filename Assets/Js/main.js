@@ -1,15 +1,18 @@
-const matrix = [];
+let matrix = [];
 let stepCount = 0;
 let cols = 3;
 let rows =3;
 let mark ="X";
+const elements=document.querySelectorAll(".cell");
+const cells=Array.from(elements);
 
-const inintState = () => {
+const initState = () => {
 
-// Hogy működik az értékadás? 
-for (let row = 0; row < rows+1; row++) {
-    for (let cell = 0; cell < cols+1; cell++) {
-        changeMatrixValue([row][cell])="";
+for (let row = 0; row < rows; row++) {
+    matrix[row]=[];
+    
+    for (let cell = 0; cell < cols; cell++) {
+        matrix[row][cell]="";
         }
     };
 }
@@ -21,9 +24,9 @@ const changeMatrixValue = (element) => {
 
 // Talán ugyanaz, mint az initState!!
     const deleteSigns = () => {
-    cells.forEach((cell) => {
-        cell.innerHTML = "";
-    });
+    cells.forEach((cell) => 
+        (cell.innerHTML = "")
+    );
     };
 
     const increaseCounter = () => {
@@ -31,15 +34,15 @@ const changeMatrixValue = (element) => {
     };
 
     const modifyCell = (element) => {
-    element.innerHTML=mark
-   element.removeEventListener('click', handleClick );
+    element.innerHTML=mark;
+    element.removeEventListener('click', handleClick );
     };
 
     const setMark = () => {
-    if (mark==="X") {mark="0"
+    if (mark==="X") {mark="O";
         
     } else {
-     mark="X"   
+     mark="X";
     }
     }
 
@@ -53,15 +56,24 @@ const changeMatrixValue = (element) => {
            
     // Ide nem a changeMatrixValue fgv kell? Továbbra sem értem a cells és a cell szavakat!
     const addClickListener = () => {
-    cells.forEach(cell => cells.addEventListener('click', handleClick));
+    cells.forEach((cell) => cell.addEventListener('click', handleClick));
     };
 
     const removeAllClickListeners = () => {
-        cells.forEach(cell => cells.removeEventListener('click', handleClick));
+        cells.forEach(cell => cell.removeEventListener('click', handleClick));
     };
     
     const checkValues = (array) => array.map((row) => {
-        row.every(item=>item.innerHTML==="X");}).indexOf(true) !== -1;
+       if (row.every((item) => item === "X")) {
+        return true;
+    }
+    else if (row.every((item) => item === "O")){
+    return true;
+    }
+    else {
+        return false;
+    }   
+   }).indexOf(true) !== -1;
 
     const checkColumnValues = () => 
     checkValues(matrix.map((array, i) => 
@@ -75,12 +87,14 @@ const changeMatrixValue = (element) => {
     ]);
 
     const checkWinner = () => {
-        Consol.log(checkColumnValues());
-        consol.log(checkDiagonalValues());
-        };
+        console.log(checkColumnValues());
+        console.log(checkDiagonalValues());
+        if (checkValues(matrix) || checkColumnValues() || checkDiagonalValues())
+        endGame();
+    };
     
         const setMessage = (message) => {
-            document.querySelectorbyclass("message").innerHTML=message;
+            document.querySelector(".message").innerHTML = message;
         };  
 
         const startGame = () => {
@@ -90,13 +104,13 @@ const changeMatrixValue = (element) => {
         };
 
         const endGame = () => {
-            setMessage ('The winner is Player '+ (mark === 'X' ? 'O' : 'X') + '.');
+            setMessage ('The winner is Player ' + (mark === 'X' ? 'O' : 'X') + '.');
             removeAllClickListeners();
             
         };  
         // Hogyan kell megadni a klikk után, ha több függvényt is futtatnék!! 
         const newGame = () => {
-         document.querySelectorbyId(btn__newGame).addEventListener('click', {
+         document.querySelector(".btn__newGame").addEventListener('click', () => {
             initState();
             addClickListener();
             deleteSigns();
